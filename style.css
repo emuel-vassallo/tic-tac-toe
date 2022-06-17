@@ -1,6 +1,10 @@
 :root {
   --color: #e8e8e8;
   --background-color: #121212;
+  --gameboard-button-background-color: #1f1f1f;
+  --gameboard-button-background-color-hover: #212121;
+  --gameboard-button-background-color-active: #222222;
+  --gameboard-button-text-color: #e8e3e3;
 }
 
 body {
@@ -10,15 +14,28 @@ body {
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  justify-content: center;
+  grid-template-columns: repeat(3, 126px);
+  grid-template-rows: repeat(3, 126px);
+  gap: 10px;
 }
 
-.board-symbol {
+.board-mark-button {
   display: flex;
-  margin: 0;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+  font-size: 4rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 0;
+  background-color: var(--gameboard-button-background-color);
+  color: var(--gameboard-button-text-color);
+}
+
+.board-mark-button:hover {
+  background-color: var(--gameboard-button-background-color-hover);
+}
+
+.board-mark-button:active {
+  background-color: var(--gameboard-button-background-color-active);
 }
