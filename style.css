@@ -1,10 +1,10 @@
 :root {
   --color: #e8e8e8;
-  --background-color: #121212;
+  --background-color: #151515;
   --gameboard-button-background-color: #1f1f1f;
   --gameboard-button-background-color-hover: #252525;
-  --gameboard-button-background-color-active: #212121;
   --gameboard-button-text-color: #e8e3e3;
+  --win-highlight-background-color: #1f2f1f;
 }
 
 body {
@@ -15,32 +15,36 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 126px);
   grid-template-rows: repeat(3, 126px);
-  gap: 10px;
+  gap: 16px;
   justify-content: center;
 }
 
-.board-mark-button {
+.board-button {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 4rem;
   cursor: pointer;
   border: none;
-  border-radius: 8px;
+  border-radius: 32px;
   padding: 0;
   color: var(--color);
   background-color: var(--gameboard-button-background-color);
   color: var(--gameboard-button-text-color);
-  transition: all 0.12s ease-in-out;
-  font-weight: 600;
+  transition-duration: 0.3s;
+  font-weight: bold;
+  user-select: none;
 }
 
-.board-mark-button:hover {
+.board-button:enabled:hover {
   background-color: var(--gameboard-button-background-color-hover);
   transform: scale(1.03, 1.03);
 }
 
-.board-mark-button:active {
-  background-color: var(--gameboard-button-background-color-active);
-  transform: scale(1, 1);
+.board-button:enabled:active {
+  transform: scale(0.99, 0.99);
+}
+
+.win-highlight {
+  background-color: var(--win-highlight-background-color);
 }
