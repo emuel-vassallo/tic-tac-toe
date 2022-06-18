@@ -1,34 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
 :root {
-  --color: #e8e8e8;
+  --color: #e8e3e3;
   --background-color: #151515;
   --gameboard-button-background-color: #1f1f1f;
-  --gameboard-button-background-color-hover: #252525;
+  --gameboard-button-background-color-hover: #212121;
   --gameboard-button-text-color: #e8e3e3;
   --win-highlight-background-color: #1f2f1f;
+  --start-game-button-background-color: #1f1f1f;
 }
 
 body {
   background-color: var(--background-color);
+  font-family: 'Nunito', sans-serif;
+  overflow: hidden;
 }
+
+/* Start Page */
+
+.start-page.hidden,
+main.hidden {
+  display: none;
+}
+
+.start-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  color: var(--color);
+  background-color: var(--background-color);
+  color: var(--color);
+  gap: 32px;
+}
+
+.start-page > h1 {
+  font-size: 3.8rem;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.start-game-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: unset;
+  width: 200px;
+  height: 54px;
+  color: var(--color);
+  background-color: var(--start-game-button-background-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid #e8e3e3;
+  border-radius: 16px;
+  padding: 10px;
+  transition: all 50ms;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.start-game-button:hover {
+  filter: brightness(1.1);
+}
+
+.start-game-button:active {
+  filter: brightness(0.9);
+}
+
+/* Main */
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+/* Gameboard */
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(3, 126px);
-  grid-template-rows: repeat(3, 126px);
+  grid-template-columns: repeat(3, 76px);
+  grid-template-rows: repeat(3, 76px);
   gap: 16px;
   justify-content: center;
 }
+
+/* Gameboard Buttons */
 
 .board-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4rem;
+  font-size: 2rem;
   cursor: pointer;
   border: none;
-  border-radius: 32px;
+  border-radius: 21px;
   padding: 0;
-  color: var(--color);
   background-color: var(--gameboard-button-background-color);
   color: var(--gameboard-button-text-color);
   transition-duration: 0.3s;

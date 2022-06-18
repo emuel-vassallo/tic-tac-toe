@@ -61,6 +61,16 @@ const Player = (mark) => {
 };
 
 const displayController = (() => {
+  const hideStartPageOnClick = () => {
+    const mainElement = document.querySelector('main');
+    const startPage = document.querySelector('.start-page');
+    const startGameButton = document.querySelector('.start-game-button');
+    startGameButton.addEventListener('click', () => {
+      startPage.classList.add('hidden');
+      mainElement.classList.remove('hidden');
+    });
+  };
+
   const addHighlightClass = () => {
     const boardButtons = document.querySelectorAll('.board-button');
     const winningBoardCells = Gameboard.getWinningBoardCells();
@@ -93,7 +103,7 @@ const displayController = (() => {
     }
   };
 
-  return { addMarkOnClick };
+  return { hideStartPageOnClick, addMarkOnClick };
 })();
 
 const flowController = (() => {
@@ -107,4 +117,5 @@ const flowController = (() => {
   return { main };
 })();
 
+displayController.hideStartPageOnClick();
 flowController.main();
