@@ -2,13 +2,12 @@
   --color: #e8e8e8;
   --background-color: #121212;
   --gameboard-button-background-color: #1f1f1f;
-  --gameboard-button-background-color-hover: #212121;
-  --gameboard-button-background-color-active: #222222;
+  --gameboard-button-background-color-hover: #252525;
+  --gameboard-button-background-color-active: #212121;
   --gameboard-button-text-color: #e8e3e3;
 }
 
 body {
-  color: var(--color);
   background-color: var(--background-color);
 }
 
@@ -28,14 +27,18 @@ body {
   border: none;
   border-radius: 8px;
   padding: 0;
+  color: var(--color);
   background-color: var(--gameboard-button-background-color);
   color: var(--gameboard-button-text-color);
+  transition: all 0.12s ease-in-out;
 }
 
 .board-mark-button:hover {
   background-color: var(--gameboard-button-background-color-hover);
+  transform: scale(1.03, 1.03);
 }
 
 .board-mark-button:active {
   background-color: var(--gameboard-button-background-color-active);
+  transform: scale(1, 1);
 }

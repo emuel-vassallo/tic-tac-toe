@@ -2,8 +2,6 @@ const Gameboard = (() => {
   const gameboard = ['', '', '', '', '', '', '', '', ''];
 
   const renderBoard = (gameboardSelector) => {
-    document.querySelector(gameboardSelector).innerHTML = '';
-
     for (let i = 0; i < gameboard.length; i++) {
       const boardMarkElement = document.createElement('button');
 
@@ -15,22 +13,46 @@ const Gameboard = (() => {
     }
   };
 
-  return { gameboard, renderBoard };
+  const addMarkOnClick = (player1Mark, player2Mark) => {
+    const boardButtons = document.querySelectorAll('.board-mark-button');
+    let hasPlayer1Clicked = false;
+
+    for (const button of boardButtons) {
+      button.addEventListener('click', () => {
+        const boardMarkNumberClicked = button.dataset.boardMarkNumber;
+        const isMarkOccupied = Gameboard.gameboard[boardMarkNumberClicked];
+
+        if (
+          boardMarkNumberClicked < 0 ||
+          boardMarkNumberClicked > 8 ||
+          isMarkOccupied
+        )
+          return;
+
+        const gameboardButton = boardButtons[boardMarkNumberClicked];
+
+        if (hasPlayer1Clicked) {
+          gameboard[boardMarkNumberClicked] = player1Mark;
+          gameboardButton.textContent = player1Mark;
+          hasPlayer1Clicked = false;
+          return;
+        }
+
+        gameboard[boardMarkNumberClicked] = player2Mark;
+        gameboardButton.textContent = player2Mark;
+        hasPlayer1Clicked = true;
+      });
+    }
+  };
+
+  return { gameboard, renderBoard, addMarkOnClick };
 })();
 
 const Player = (mark) => {
   const getMark = () => mark;
 
-  const addMarkToBoard = (symbol, positionNumber) => {
-    const isMarkOccupied = Gameboard.gameboard[positionNumber];
-    if (positionNumber < 0 || positionNumber > 8 || isMarkOccupied) return;
-    Gameboard.gameboard[positionNumber] = symbol;
-    Gameboard.renderBoard('.game-board');
-  };
-  
   return {
     getMark,
-    addMarkToBoard,
   };
 };
 
@@ -38,3 +60,6 @@ Gameboard.renderBoard('.game-board');
 
 const player1 = Player('X');
 const player2 = Player('O');
+
+Gameboard.addMarkOnClick(player1.getMark(), player2.getMark());
+// player2.updateBoardOnClick();
