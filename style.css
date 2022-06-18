@@ -16,6 +16,7 @@ body {
   grid-template-columns: repeat(3, 126px);
   grid-template-rows: repeat(3, 126px);
   gap: 10px;
+  justify-content: center;
 }
 
 .board-mark-button {
@@ -31,6 +32,7 @@ body {
   background-color: var(--gameboard-button-background-color);
   color: var(--gameboard-button-text-color);
   transition: all 0.12s ease-in-out;
+  font-weight: 600;
 }
 
 .board-mark-button:hover {
