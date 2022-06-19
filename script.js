@@ -1,5 +1,5 @@
 const Gameboard = (() => {
-  const gameboard = ['', '', '', '', '', '', '', '', ''];
+  let gameboard = ['', '', '', '', '', '', '', '', ''];
 
   const renderBoard = (gameboardSelector) => {
     for (let i = 0; i < gameboard.length; i++) {
@@ -23,6 +23,7 @@ const Gameboard = (() => {
   const isTie = gameboard.every((e) => e !== '');
 
   const getWinningBoardCells = () => {
+    const gameboard = Gameboard.gameboard;
     if (areArrayElementsEqual(gameboard.slice(0, 3))) return [0, 1, 2];
     if (areArrayElementsEqual(gameboard.slice(3, 6))) return [3, 4, 5];
     if (areArrayElementsEqual(gameboard.slice(6, 9))) return [6, 7, 8];
@@ -44,6 +45,15 @@ const Gameboard = (() => {
 
   const isGameOver = () => getWinningBoardCells().length === 3;
 
+  const resetGameboard = () => {
+    const boardButtons = document.querySelectorAll('.board-button');
+    boardButtons.forEach((button) => {
+      button.textContent = '';
+      button.disabled = false;
+    });
+    Gameboard.gameboard = ['', '', '', '', '', '', '', '', ''];
+  };
+
   return {
     gameboard,
     renderBoard,
@@ -51,6 +61,7 @@ const Gameboard = (() => {
     getWinningBoardCells,
     disableGameboard,
     isTie,
+    resetGameboard,
   };
 })();
 
@@ -82,18 +93,28 @@ const displayController = (() => {
     });
   };
 
-  const addHighlightClass = () => {
+  const getWinningBoardButtons = () => {
     const boardButtons = document.querySelectorAll('.board-button');
     const winningBoardCells = Gameboard.getWinningBoardCells();
-    console.log({ boardButtons });
     let winningBoardButtons = [];
     for (const cell of winningBoardCells) {
       winningBoardButtons = [...winningBoardButtons, boardButtons[cell]];
     }
+    return winningBoardButtons;
+  };
+
+  const addHighlightClass = () => {
+    const winningBoardButtons = getWinningBoardButtons();
     for (button of winningBoardButtons) {
       button.classList.add('win-highlight');
     }
-    showWinMessage(winningBoardButtons);
+  };
+
+  const removeHighlightClass = () => {
+    const winningBoardButtons = getWinningBoardButtons();
+    for (button of winningBoardButtons) {
+      button.classList.remove('win-highlight');
+    }
   };
 
   const addMarkOnClick = (player1Mark, player2Mark) => {
@@ -108,8 +129,10 @@ const displayController = (() => {
         Gameboard.gameboard[buttonNumClicked] = playerMarks[playerMarksIndex];
         boardButtons[buttonNumClicked].textContent = playerMarks[0];
         if (Gameboard.isGameOver()) {
-          addHighlightClass();
+          const winningBoardButtons = getWinningBoardButtons();
           Gameboard.disableGameboard();
+          addHighlightClass();
+          showWinMessage(winningBoardButtons);
         }
         playerMarks = playerMarks.reverse();
       });
@@ -124,6 +147,16 @@ const displayController = (() => {
       ? document.querySelector('#player1-name').textContent
       : document.querySelector('#player2-name').textContent;
 
+  const restartGame = () => {
+    const winnerModal = document.querySelector('.winner-modal');
+    const restartButton = document.querySelector('.restart-game-button');
+    restartButton.addEventListener('click', () => {
+      removeHighlightClass();
+      Gameboard.resetGameboard();
+      winnerModal.classList.toggle('show-modal');
+    });
+  };
+
   const showWinMessage = (winningBoardButtons) => {
     const winnerModal = document.querySelector('.winner-modal');
     const winningPlayerNameTag = document.querySelector('.winner-modal > p');
@@ -133,7 +166,7 @@ const displayController = (() => {
     winningPlayerNameTag.textContent = `${winner} has won!`;
   };
 
-  return { hideStartPageOnClick, addMarkOnClick };
+  return { hideStartPageOnClick, addMarkOnClick, restartGame };
 })();
 
 const flowController = (() => {
@@ -144,6 +177,7 @@ const flowController = (() => {
     displayController.addMarkOnClick(player1.getMark(), player2.getMark());
     player1.changePlayerName();
     player2.changePlayerName();
+    displayController.restartGame();
   };
 
   return { main };

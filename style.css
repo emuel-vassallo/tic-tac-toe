@@ -70,7 +70,7 @@ main.hidden {
   border-radius: 16px;
   cursor: pointer;
   text-transform: uppercase;
-  transition: 0.3s;
+  transition: 0.5s;
 }
 
 .start-game-button:hover,
@@ -79,7 +79,7 @@ main.hidden {
   transform: scale(1.06, 1.06);
 }
 
-.start-game-button:active, 
+.start-game-button:active,
 .restart-game-button:active {
   filter: brightness(0.9);
 }
@@ -148,7 +148,7 @@ main {
 }
 
 .versus {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -200,13 +200,14 @@ main {
 .winner-modal {
   display: flex;
   flex-direction: column;
-  font-weight: 600;
+  font-weight: 1000;
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 30vh;
+  border-radius: 18px;
+  width: 500px;
+  height: 300px;
   opacity: 0;
   visibility: hidden;
   background-color: rgba(0, 0, 0, 0.8);
@@ -217,7 +218,7 @@ main {
 .show-modal {
   opacity: 1;
   visibility: visible;
-  transition: visibility 0s linear 0s, opacity 0.15s 0s;
+  transition: visibility 0s linear 0s, opacity 0.3s 0s;
 }
 
 .winner-modal > p {
