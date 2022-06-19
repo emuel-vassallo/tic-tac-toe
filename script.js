@@ -109,8 +109,8 @@ const displayController = (() => {
 const flowController = (() => {
   const main = () => {
     Gameboard.renderBoard('.game-board');
-    const player1 = Player('X');
-    const player2 = Player('O');
+    const player1 = Player('x');
+    const player2 = Player('o');
     displayController.addMarkOnClick(player1.getMark(), player2.getMark());
   };
 
