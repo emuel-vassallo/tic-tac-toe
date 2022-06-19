@@ -84,12 +84,12 @@ const Player = (mark, nameElement) => {
 
 const displayController = (() => {
   const hideStartPageOnClick = () => {
-    const mainElement = document.querySelector('main');
+    const mainPage = document.querySelector('.main-page');
     const startPage = document.querySelector('.start-page');
     const startGameButton = document.querySelector('.start-game-button');
     startGameButton.addEventListener('click', () => {
       startPage.classList.add('hidden');
-      mainElement.classList.remove('hidden');
+      mainPage.classList.remove('hidden');
     });
   };
 
@@ -185,3 +185,7 @@ const flowController = (() => {
 
 displayController.hideStartPageOnClick();
 flowController.main();
+
+document
+  .getElementById('year')
+  .appendChild(document.createTextNode(new Date().getFullYear()));

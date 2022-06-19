@@ -22,20 +22,27 @@ body {
   color: var(--color);
 }
 
-/* Heading */
+/* Header */
 
-.start-page > h1,
-main > h1 {
+.start-page header {
   font-size: 3.8rem;
-  margin: 0;
   text-transform: capitalize;
   text-align: center;
+  margin: 0;
+}
+
+.main-page header {
+  font-size: 3.8rem;
+  margin: 32px 0 0 0;
+  text-transform: capitalize;
+  text-align: center;
+  margin: 43px 0 0 0;
 }
 
 /* Start Page */
 
 .start-page.hidden,
-main.hidden {
+.main-page.hidden {
   display: none;
 }
 
@@ -50,7 +57,15 @@ main.hidden {
   color: var(--color);
   background-color: var(--background-color);
   color: var(--color);
-  gap: 32px;
+}
+
+.start-page > p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.start-game-button {
+  margin: 32px 0 0 0;
 }
 
 .start-game-button,
@@ -86,15 +101,25 @@ main.hidden {
 
 /* Main */
 
+.main-page {
+  display: flex;
+  flex-direction: column;
+  height: 99vh;
+  width: 100vw;
+  align-items: center;
+  gap: 18px;
+}
+
 main {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100vh;
   flex-direction: column;
   gap: 36px;
   width: 100vw;
   height: 100vh;
+  margin-top: 42px;
 }
 
 /* Gameboard */
@@ -210,7 +235,7 @@ main {
   height: 300px;
   opacity: 0;
   visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
   transition: visibility 0s linear 0.25s, opacity 0.15s 0s;
   z-index: 2;
 }
@@ -218,10 +243,40 @@ main {
 .show-modal {
   opacity: 1;
   visibility: visible;
-  transition: visibility 0s linear 0s, opacity 0.3s 0s;
+  transition: visibility 0s linear 0s, opacity 0.55s 0.55s;
 }
 
 .winner-modal > p {
   font-size: 3rem;
   text-align: center;
+}
+
+.main-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+}
+
+/* Footer */
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: var(--border-divider);
+  height: 72px;
+}
+
+footer a {
+  color: var(--grey-color);
+  text-decoration: none;
+}
+
+footer p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
