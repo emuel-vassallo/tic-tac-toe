@@ -53,7 +53,8 @@ main.hidden {
   gap: 32px;
 }
 
-.start-game-button {
+.start-game-button,
+.restart-game-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,12 +73,14 @@ main.hidden {
   transition: 0.3s;
 }
 
-.start-game-button:hover {
+.start-game-button:hover,
+.restart-game-button:hover {
   filter: brightness(1.2);
   transform: scale(1.06, 1.06);
 }
 
-.start-game-button:active {
+.start-game-button:active, 
+.restart-game-button:active {
   filter: brightness(0.9);
 }
 
@@ -145,7 +148,7 @@ main {
 }
 
 .versus {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -156,7 +159,7 @@ main {
   align-items: center;
   justify-content: center;
   min-width: 100px;
-  max-width: 150px;
+  max-width: 160px;
   overflow: hidden;
   gap: 8px;
   padding: 14px 28px;
@@ -178,7 +181,7 @@ main {
   font-weight: 600;
   background-color: var(--player-name-button-background-color);
   color: var(--color);
-  max-width: 120px;
+  max-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
   border: none;
@@ -190,4 +193,34 @@ main {
 
 .player-name:hover {
   filter: brightness(1.1);
+}
+
+/* Winner Modal */
+
+.winner-modal {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: visibility 0s linear 0.25s, opacity 0.15s 0s;
+  z-index: 2;
+}
+
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0s linear 0s, opacity 0.15s 0s;
+}
+
+.winner-modal > p {
+  font-size: 3rem;
+  text-align: center;
 }

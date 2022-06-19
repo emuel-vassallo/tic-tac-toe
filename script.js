@@ -20,7 +20,7 @@ const Gameboard = (() => {
   const areArrayElementsEqual = (array) =>
     !!array.reduce((a, b) => (a === b ? a : NaN));
 
-  const isTie = gameboard.every((e) => e);
+  const isTie = gameboard.every((e) => e !== '');
 
   const getWinningBoardCells = () => {
     if (areArrayElementsEqual(gameboard.slice(0, 3))) return [0, 1, 2];
@@ -42,7 +42,7 @@ const Gameboard = (() => {
     return [];
   };
 
-  const isGameOver = () => isTie || getWinningBoardCells().length > 0;
+  const isGameOver = () => getWinningBoardCells().length === 3;
 
   return {
     gameboard,
@@ -50,6 +50,7 @@ const Gameboard = (() => {
     isGameOver,
     getWinningBoardCells,
     disableGameboard,
+    isTie,
   };
 })();
 
@@ -84,6 +85,7 @@ const displayController = (() => {
   const addHighlightClass = () => {
     const boardButtons = document.querySelectorAll('.board-button');
     const winningBoardCells = Gameboard.getWinningBoardCells();
+    console.log({ boardButtons });
     let winningBoardButtons = [];
     for (const cell of winningBoardCells) {
       winningBoardButtons = [...winningBoardButtons, boardButtons[cell]];
@@ -91,6 +93,7 @@ const displayController = (() => {
     for (button of winningBoardButtons) {
       button.classList.add('win-highlight');
     }
+    showWinMessage(winningBoardButtons);
   };
 
   const addMarkOnClick = (player1Mark, player2Mark) => {
@@ -111,6 +114,23 @@ const displayController = (() => {
         playerMarks = playerMarks.reverse();
       });
     }
+  };
+
+  const getWinnerSymbol = (winningBoardButtons) =>
+    winningBoardButtons[0].textContent;
+
+  const getWinner = (winnerSymbol) =>
+    winnerSymbol === 'x'
+      ? document.querySelector('#player1-name').textContent
+      : document.querySelector('#player2-name').textContent;
+
+  const showWinMessage = (winningBoardButtons) => {
+    const winnerModal = document.querySelector('.winner-modal');
+    const winningPlayerNameTag = document.querySelector('.winner-modal > p');
+    winnerModal.classList.toggle('show-modal');
+    const winnerSymbol = getWinnerSymbol(winningBoardButtons);
+    const winner = getWinner(winnerSymbol);
+    winningPlayerNameTag.textContent = `${winner} has won!`;
   };
 
   return { hideStartPageOnClick, addMarkOnClick };
