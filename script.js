@@ -117,17 +117,32 @@ const displayController = (() => {
     }
   };
 
+  const identifyCurrentPlayer = (playerMark) => {
+    const player1Card = document.querySelector('.player1');
+    const player2Card = document.querySelector('.player2');
+    if (playerMark === 'o') {
+      player1Card.style.filter = 'brightness(1.2)';
+      player2Card.style.filter = 'brightness(1)';
+    } else {
+      player2Card.style.filter = 'brightness(1.2)';
+      player1Card.style.filter = 'brightness(1)';
+    }
+  };
+
   const addMarkOnClick = (player1Mark, player2Mark) => {
     let playerMarksIndex = 0;
     let playerMarks = [player1Mark, player2Mark];
     const boardButtons = document.querySelectorAll('.board-button');
+    identifyCurrentPlayer('o');
 
     for (const button of boardButtons) {
       button.addEventListener('click', () => {
+        const currentMark = playerMarks[0];
+        identifyCurrentPlayer(currentMark);
         const buttonNumClicked = button.dataset.boardMarkNumber;
         if (Gameboard.gameboard[buttonNumClicked]) return;
         Gameboard.gameboard[buttonNumClicked] = playerMarks[playerMarksIndex];
-        boardButtons[buttonNumClicked].textContent = playerMarks[0];
+        boardButtons[buttonNumClicked].textContent = currentMark;
         if (Gameboard.isGameOver()) {
           const winningBoardButtons = getWinningBoardButtons();
           Gameboard.disableGameboard();
