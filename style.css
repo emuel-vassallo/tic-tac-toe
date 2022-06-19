@@ -9,10 +9,10 @@
   --gameboard-button-background-color: #1f1f1f;
   --gameboard-button-background-color-hover: #222222;
   --gameboard-button-text-color: #e8e3e3;
-  --win-highlight-background-color: #1f2f1f;
+  --win-highlight-background-color: #1f2a1f;
   --start-game-button-background-color: #1f1f1f;
   --player-name-button-background-color: #252525;
-  --player-name-button-background-color-hover: #282828;
+  --player-name-button-background-color-hover: #1f1f1f;
 }
 
 body {
@@ -29,6 +29,7 @@ main > h1 {
   font-size: 3.8rem;
   margin: 0;
   text-transform: capitalize;
+  text-align: center;
 }
 
 /* Start Page */
@@ -65,7 +66,6 @@ main.hidden {
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
-  border: 1px solid #e8e3e3;
   border-radius: 16px;
   cursor: pointer;
   text-transform: uppercase;
@@ -73,7 +73,8 @@ main.hidden {
 }
 
 .start-game-button:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.2);
+  transform: scale(1.06, 1.06);
 }
 
 .start-game-button:active {
@@ -112,8 +113,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4.2rem;
-  font-weight: 600;
+  font-size: 6rem;
   cursor: pointer;
   border: none;
   border-radius: 24px;
@@ -127,38 +127,42 @@ main {
 
 .board-button:enabled:hover {
   background-color: var(--gameboard-button-background-color-hover);
-  transform: scale(1.03, 1.03);
+  transform: scale(1.06, 1.06);
 }
 
 .win-highlight {
   background-color: var(--win-highlight-background-color);
+  scale: 1.06;
 }
 
 /* Player Cards */
 
 .player-cards {
   display: flex;
-  gap: 40px;
+  gap: 36px;
   align-items: center;
   justify-content: center;
 }
 
 .versus {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   font-weight: 600;
 }
 
 .player-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  min-width: 100px;
+  max-width: 150px;
+  overflow: hidden;
+  gap: 8px;
   padding: 14px 28px;
   text-transform: capitalize;
   background-color: var(--gameboard-background-color);
   border-radius: 18px;
-  flex-direction: column;
 }
 
 .player-card p {
@@ -166,14 +170,17 @@ main {
 }
 
 .player-card > p:first-child {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .player-name {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
   background-color: var(--player-name-button-background-color);
   color: var(--color);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   border: none;
   cursor: pointer;
   padding: 5px 16px;
@@ -182,5 +189,5 @@ main {
 }
 
 .player-name:hover {
-  background-color: var(--player-name-button-background-color-hover);
+  filter: brightness(1.1);
 }

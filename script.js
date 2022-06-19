@@ -53,10 +53,20 @@ const Gameboard = (() => {
   };
 })();
 
-const Player = (mark) => {
+const Player = (mark, nameElement) => {
   const getMark = () => mark;
+  const getName = () => nameElement.textContent;
+  const changePlayerName = () => {
+    const playerNameButton = document.querySelector(nameElement);
+    playerNameButton.addEventListener('click', () => {
+      playerNameButton.textContent = prompt('Enter new name');
+    });
+  };
+
   return {
     getMark,
+    getName,
+    changePlayerName,
   };
 };
 
@@ -109,9 +119,11 @@ const displayController = (() => {
 const flowController = (() => {
   const main = () => {
     Gameboard.renderBoard('.game-board');
-    const player1 = Player('x');
-    const player2 = Player('o');
+    const player1 = Player('x', '#player1-name');
+    const player2 = Player('o', '#player2-name');
     displayController.addMarkOnClick(player1.getMark(), player2.getMark());
+    player1.changePlayerName();
+    player2.changePlayerName();
   };
 
   return { main };
