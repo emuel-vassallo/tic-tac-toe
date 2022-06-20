@@ -20,8 +20,6 @@ const Gameboard = (() => {
   const areArrayElementsEqual = (array) =>
     !!array.reduce((a, b) => (a === b ? a : NaN));
 
-  const isTie = gameboard.every((e) => e !== '');
-
   const getWinningBoardCells = () => {
     const gameboard = Gameboard.gameboard;
     if (areArrayElementsEqual(gameboard.slice(0, 3))) return [0, 1, 2];
@@ -60,7 +58,6 @@ const Gameboard = (() => {
     isGameOver,
     getWinningBoardCells,
     disableGameboard,
-    isTie,
     resetGameboard,
   };
 })();
@@ -143,11 +140,19 @@ const displayController = (() => {
         if (Gameboard.gameboard[buttonNumClicked]) return;
         Gameboard.gameboard[buttonNumClicked] = playerMarks[playerMarksIndex];
         boardButtons[buttonNumClicked].textContent = currentMark;
+
+        const isTie = Gameboard.gameboard.every((e) => e !== '');
+
         if (Gameboard.isGameOver()) {
           const winningBoardButtons = getWinningBoardButtons();
           Gameboard.disableGameboard();
           addHighlightClass();
           showWinMessage(winningBoardButtons);
+        }
+
+        if (isTie) {
+          Gameboard.disableGameboard();
+          showTieMessage();
         }
         playerMarks = playerMarks.reverse();
       });
@@ -179,6 +184,13 @@ const displayController = (() => {
     const winnerSymbol = getWinnerSymbol(winningBoardButtons);
     const winner = getWinner(winnerSymbol);
     winningPlayerNameTag.textContent = `${winner} has won!`;
+  };
+
+  const showTieMessage = () => {
+    const winnerModal = document.querySelector('.winner-modal');
+    const winningPlayerNameTag = document.querySelector('.winner-modal > p');
+    winnerModal.classList.toggle('show-modal');
+    winningPlayerNameTag.textContent = "It's a tie!";
   };
 
   return { hideStartPageOnClick, addMarkOnClick, restartGame };
