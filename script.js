@@ -136,7 +136,6 @@ const displayController = (() => {
       button.addEventListener('click', () => {
         const currentMark = playerMarks[0];
         const buttonNumClicked = button.dataset.boardMarkNumber;
-        const isTie = Gameboard.gameboard.every((e) => e !== '');
 
         if (Gameboard.gameboard[buttonNumClicked]) return;
         identifyCurrentPlayer(currentMark);
@@ -151,11 +150,12 @@ const displayController = (() => {
           showWinMessage(winningBoardButtons);
         }
 
+        const isTie = Gameboard.gameboard.every((e) => e !== '');
         if (isTie) {
           Gameboard.disableGameboard();
           showTieMessage();
         }
-        
+
         playerMarks = playerMarks.reverse();
       });
     }
