@@ -135,13 +135,14 @@ const displayController = (() => {
     for (const button of boardButtons) {
       button.addEventListener('click', () => {
         const currentMark = playerMarks[0];
-        identifyCurrentPlayer(currentMark);
         const buttonNumClicked = button.dataset.boardMarkNumber;
+        const isTie = Gameboard.gameboard.every((e) => e !== '');
+
         if (Gameboard.gameboard[buttonNumClicked]) return;
+        identifyCurrentPlayer(currentMark);
+
         Gameboard.gameboard[buttonNumClicked] = playerMarks[playerMarksIndex];
         boardButtons[buttonNumClicked].textContent = currentMark;
-
-        const isTie = Gameboard.gameboard.every((e) => e !== '');
 
         if (Gameboard.isGameOver()) {
           const winningBoardButtons = getWinningBoardButtons();
@@ -154,6 +155,7 @@ const displayController = (() => {
           Gameboard.disableGameboard();
           showTieMessage();
         }
+        
         playerMarks = playerMarks.reverse();
       });
     }
